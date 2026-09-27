@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenVAS LAN-aware VPN kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/sbin/nft delete table inet openvas_killswitch
+ExecStart=/usr/sbin/nft -f /etc/nftables-openvas.conf
+ExecReload=/usr/sbin/nft delete table inet openvas_killswitch
+ExecReload=/usr/sbin/nft -f /etc/nftables-openvas.conf
+ExecStop=/usr/sbin/nft delete table inet openvas_killswitch
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

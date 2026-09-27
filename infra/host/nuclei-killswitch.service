@@ -1,0 +1,16 @@
+[Unit]
+Description=Nuclei Docker VPN kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/sbin/nft delete table inet nuclei_killswitch
+ExecStart=/usr/sbin/nft -f /etc/nftables-nuclei.conf
+ExecReload=/usr/sbin/nft delete table inet nuclei_killswitch
+ExecReload=/usr/sbin/nft -f /etc/nftables-nuclei.conf
+ExecStop=/usr/sbin/nft delete table inet nuclei_killswitch
+
+[Install]
+WantedBy=multi-user.target

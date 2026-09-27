@@ -1,0 +1,8 @@
+# Plantilla: sustituya LAN_CIDR y LAN_INTERFACE desde .env antes de instalarla.
+table inet osint_killswitch {
+    chain forward {
+        type filter hook forward priority -10; policy accept;
+        iifname "osintbr0" ip saddr { 172.33.0.2, 172.33.0.3 } ip daddr LAN_CIDR oifname "LAN_INTERFACE" accept
+        iifname "osintbr0" ip saddr { 172.33.0.2, 172.33.0.3 } oifname "LAN_INTERFACE" drop
+    }
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=DNS Docker VPN kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/sbin/nft delete table inet dns_killswitch
+ExecStart=/usr/sbin/nft -f /etc/nftables-dns.conf
+ExecReload=/usr/sbin/nft delete table inet dns_killswitch
+ExecReload=/usr/sbin/nft -f /etc/nftables-dns.conf
+ExecStop=/usr/sbin/nft delete table inet dns_killswitch
+
+[Install]
+WantedBy=multi-user.target

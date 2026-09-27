@@ -1,0 +1,20 @@
+services:
+  ospd-openvas:
+    networks:
+      default:
+        ipv4_address: 172.18.0.2
+
+  openvasd:
+    networks:
+      default:
+        ipv4_address: 172.18.0.7
+
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.name: openvasbr0
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          ip_range: 172.18.128.0/17
+          gateway: 172.18.0.1

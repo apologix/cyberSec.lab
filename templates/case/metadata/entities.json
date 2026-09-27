@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "case_id": "CASE_ID",
+  "entities": [],
+  "relationships": [],
+  "confidence_levels": ["unverified", "possible", "probable", "confirmed"],
+  "notes": "No inferir identidad a partir de una única coincidencia. Cada relación debe incluir fuente, timestamp, confianza y referencia de evidencia."
+}

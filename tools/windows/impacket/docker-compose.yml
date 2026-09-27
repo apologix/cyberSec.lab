@@ -1,0 +1,26 @@
+services:
+  impacket:
+    build:
+      context: .
+      args:
+        IMPACKET_VERSION: "0.13.1"
+    image: cybersec/impacket:0.13.1
+    container_name: impacket
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./work:/work
+      - ./krb5:/etc/krb5:ro
+    networks:
+      impacket_net:
+        ipv4_address: 172.32.0.2
+
+networks:
+  impacket_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: impacketbr0
+    ipam:
+      config:
+        - subnet: 172.32.0.0/24
+          gateway: 172.32.0.1

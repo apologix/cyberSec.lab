@@ -1,0 +1,8 @@
+# Plantilla: sustituya LAN_CIDR y LAN_INTERFACE desde .env antes de instalarla.
+table inet tls_killswitch {
+    chain forward {
+        type filter hook forward priority -10; policy accept;
+        iifname "tlsbr0" ip saddr 172.35.0.2 ip daddr LAN_CIDR oifname "LAN_INTERFACE" accept
+        iifname "tlsbr0" ip saddr 172.35.0.2 oifname "LAN_INTERFACE" drop
+    }
+}

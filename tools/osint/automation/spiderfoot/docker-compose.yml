@@ -1,0 +1,24 @@
+services:
+  spiderfoot:
+    build:
+      context: .
+      args:
+        SPIDERFOOT_REF: ${SPIDERFOOT_REF:-v4.0}
+    image: cybersec/spiderfoot:local
+    container_name: spiderfoot
+    ports:
+      - 127.0.0.1:5001:5001
+    volumes:
+      - spiderfoot_data:/var/lib/spiderfoot
+      - ${CYBERSEC_CASES_DIR:?Defina_CYBERSEC_CASES_DIR_en_.env}:/cases:rw
+    networks:
+      osint_net:
+        ipv4_address: 172.33.0.3
+
+volumes:
+  spiderfoot_data:
+
+networks:
+  osint_net:
+    name: osint-runner_osint_net
+    external: true

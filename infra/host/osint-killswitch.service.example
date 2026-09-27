@@ -1,0 +1,16 @@
+[Unit]
+Description=OSINT Docker VPN kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/sbin/nft delete table inet osint_killswitch
+ExecStart=/usr/sbin/nft -f /etc/nftables-osint.conf
+ExecReload=/usr/sbin/nft delete table inet osint_killswitch
+ExecReload=/usr/sbin/nft -f /etc/nftables-osint.conf
+ExecStop=/usr/sbin/nft delete table inet osint_killswitch
+
+[Install]
+WantedBy=multi-user.target

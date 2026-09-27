@@ -1,0 +1,13 @@
+[Unit]
+Description=Metasploit Docker LAN-only kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '/usr/sbin/nft delete table inet metasploit_killswitch 2>/dev/null || true; /usr/sbin/nft -f /etc/nftables-metasploit.conf'
+ExecReload=/bin/sh -c '/usr/sbin/nft delete table inet metasploit_killswitch 2>/dev/null || true; /usr/sbin/nft -f /etc/nftables-metasploit.conf'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

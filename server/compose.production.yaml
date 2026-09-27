@@ -1,0 +1,41 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile.production
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${TLS_CERTS_HOST_PATH:?Set_TLS_CERTS_HOST_PATH}:/etc/nginx/certs:ro
+
+  backend:
+    environment:
+      CYBERLAB_ENVIRONMENT: production
+      COOKIE_SECURE: "true"
+      DATABASE_AUTO_CREATE: "false"
+      GEOIP_DATABASE_PATH: /opt/geoip/GeoLite2-City.mmdb
+    volumes:
+      - ${GEOIP_DATABASE_HOST_PATH:-/nonexistent}:/opt/geoip:ro
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: .env
+    command: python -m app.init_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL

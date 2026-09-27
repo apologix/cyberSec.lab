@@ -1,0 +1,16 @@
+[Unit]
+Description=enum4linux-ng Docker VPN kill switch
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/sbin/nft delete table inet enum4linux_killswitch
+ExecStart=/usr/sbin/nft -f /etc/nftables-enum4linux.conf
+ExecReload=/usr/sbin/nft delete table inet enum4linux_killswitch
+ExecReload=/usr/sbin/nft -f /etc/nftables-enum4linux.conf
+ExecStop=/usr/sbin/nft delete table inet enum4linux_killswitch
+
+[Install]
+WantedBy=multi-user.target

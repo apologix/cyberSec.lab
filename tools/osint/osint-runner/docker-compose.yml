@@ -1,0 +1,21 @@
+services:
+  osint-runner:
+    build: .
+    image: cybersec/osint-runner:local
+    stdin_open: true
+    tty: true
+    environment:
+      HIBP_API_KEY: ${HIBP_API_KEY:-}
+      INTELX_API_KEY: ${INTELX_API_KEY:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+    volumes:
+      - ${CYBERSEC_CASES_DIR:?Defina_CYBERSEC_CASES_DIR_en_.env}:/cases:rw
+    working_dir: /case
+    networks:
+      osint_net:
+        ipv4_address: 172.33.0.2
+
+networks:
+  osint_net:
+    name: osint-runner_osint_net
+    external: true

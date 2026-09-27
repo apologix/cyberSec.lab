@@ -1,0 +1,23 @@
+services:
+  metasploit:
+    image: metasploitframework/metasploit-framework:6.5.2
+    container_name: metasploit
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - ${HOME}/.msf4:/home/msf/.msf4
+
+    networks:
+      metasploit_net:
+        ipv4_address: 172.20.0.2
+
+networks:
+  metasploit_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: metasploitbr0
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1

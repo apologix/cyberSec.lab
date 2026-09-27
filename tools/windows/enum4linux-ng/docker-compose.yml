@@ -1,0 +1,25 @@
+services:
+  enum4linux:
+    build:
+      context: .
+      args:
+        ENUM4LINUX_NG_VERSION: v1.3.10
+    image: cybersec/enum4linux-ng:v1.3.10
+    container_name: enum4linux-ng
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./work:/work
+    networks:
+      enum4linux_net:
+        ipv4_address: 172.31.0.2
+
+networks:
+  enum4linux_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: enum4linuxbr0
+    ipam:
+      config:
+        - subnet: 172.31.0.0/24
+          gateway: 172.31.0.1

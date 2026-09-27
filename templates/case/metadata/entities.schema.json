@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cybersecurity Lab case entities",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "entities", "relationships", "confidence_levels"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^CASE-[0-9]{4}-[0-9]{3,}$"},
+    "confidence_levels": {"type": "array", "const": ["unverified", "possible", "probable", "confirmed"]},
+    "entities": {"type": "array", "items": {"$ref": "#/$defs/entity"}},
+    "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}}
+  },
+  "$defs": {
+    "confidence": {"enum": ["unverified", "possible", "probable", "confirmed"]},
+    "reference": {"type": "object", "required": ["source", "timestamp", "confidence"], "properties": {"source": {"type": "string", "minLength": 1}, "timestamp": {"type": "string", "format": "date-time"}, "confidence": {"$ref": "#/$defs/confidence"}, "evidence_reference": {"type": "string"}, "notes": {"type": "string"}}},
+    "entity": {"allOf": [{"$ref": "#/$defs/reference"}, {"type": "object", "required": ["id", "type", "value"], "properties": {"id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"}, "type": {"enum": ["Person", "Email", "Username", "Domain", "IP", "Profile", "Organization", "Breach", "Document", "Phone", "OtherIdentifier"]}, "value": {"type": "string", "minLength": 1}}}]},
+    "relationship": {"allOf": [{"$ref": "#/$defs/reference"}, {"type": "object", "required": ["from", "to", "type"], "properties": {"from": {"type": "string"}, "to": {"type": "string"}, "type": {"type": "string", "minLength": 1}}}]}
+  }
+}

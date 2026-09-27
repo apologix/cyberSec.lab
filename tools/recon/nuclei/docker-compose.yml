@@ -1,0 +1,25 @@
+services:
+  nuclei:
+    image: projectdiscovery/nuclei:v3.11.1
+    container_name: nuclei
+    stdin_open: true
+    tty: true
+    entrypoint: ["nuclei"]
+    volumes:
+      - ./data/config:/root/.config/nuclei
+      - ./data/cache:/root/.cache/nuclei
+      - ./data/templates:/root/nuclei-templates
+      - ./work:/work
+    networks:
+      nuclei_net:
+        ipv4_address: 172.30.0.2
+
+networks:
+  nuclei_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: nucleibr0
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1

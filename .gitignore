@@ -1,0 +1,53 @@
+# Local secrets and host-specific configuration
+.env
+.env.*
+!.env.example
+*.conf.local
+*.key
+*.pem
+*.ovpn
+*.wg
+protonwg.conf
+
+# Runtime and generated data
+**/.venv/
+**/__pycache__/
+*.py[cod]
+*.sqlite3
+*.pcap
+*.pcapng
+*.log
+
+# Case material and generated evidence must stay outside Git
+private/
+CASE/
+output/
+tmp/
+
+# Los casos nuevos se crean fuera del repositorio. Esta protección evita que
+# un directorio local de compatibilidad se añada por accidente.
+cases/
+
+# PRET se conserva como componente legacy versionado; el entorno Python local
+# y archivos generados no forman parte de su fuente reproducible.
+
+# Local Docker and tool state
+.docker/
+tools/**/data/
+tools/**/output/
+tools/**/work/
+
+# Burp Suite local projects, session state and certificates
+tools/web/burp/projects/
+tools/web/burp/state/
+*.burp
+*.burpconfig
+tools/web/burp/*.der
+tools/web/burp/*.crt
+tools/web/burp/*.p12
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+*~

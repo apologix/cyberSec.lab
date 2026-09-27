@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  :root { @apply bg-[#212121] text-[#ececec] antialiased; }
+  body { @apply m-0 min-w-80 bg-[#212121]; }
+  button, input { font: inherit; }
+  button { @apply cursor-pointer; }
+}
+
+@layer components {
+  header { @apply sticky top-0 z-10 flex min-h-15 items-center justify-between gap-5 border-b border-white/10 bg-[#212121]/95 px-5 py-3 backdrop-blur md:px-8; }
+  footer { @apply border-t border-white/10 px-5 py-5 text-center text-xs text-[#8e8e8e] md:px-8; }
+  nav { @apply flex flex-wrap items-center gap-1 text-sm; }
+  nav a { @apply rounded-lg px-3 py-2 text-[#b4b4b4] no-underline transition hover:bg-white/10 hover:text-white; }
+  .brand { @apply text-base font-semibold tracking-tight text-white no-underline; }
+  main { @apply mx-auto min-h-[calc(100vh-126px)] w-full max-w-5xl px-5 py-10 md:px-8; }
+  .hero { @apply flex max-w-3xl flex-col justify-center py-24 md:py-36; }
+  .hero h1 { @apply m-0 max-w-2xl text-4xl font-semibold tracking-tight text-white md:text-6xl; }
+  .hero p { @apply max-w-xl text-base leading-7 text-[#b4b4b4] md:text-lg; }
+  .eyebrow { @apply mb-4 text-xs font-medium tracking-[0.15em] text-[#10a37f]; }
+  .hello-page { @apply relative flex min-h-[calc(100vh-126px)] flex-col items-center justify-center overflow-hidden text-center; }
+  .hello-page > *:not(.hello-orb) { @apply relative z-10; }
+  .hello-page p:last-child { @apply mt-5 text-sm text-[#a6a6a6]; }
+  .hello-word { @apply m-0 text-7xl font-semibold tracking-[-0.08em] text-white md:text-9xl; animation: hello-rise 850ms cubic-bezier(.2,.8,.2,1) both; }
+  .hello-word span { @apply text-[#10a37f]; }
+  .hello-orb { @apply absolute h-72 w-72 rounded-full bg-[#10a37f]/15 blur-3xl; animation: hello-pulse 4s ease-in-out infinite; }
+  .button, button { @apply inline-flex items-center justify-center rounded-xl border border-white/10 bg-[#2f2f2f] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#3a3a3a] focus:outline-none focus:ring-2 focus:ring-[#10a37f]/70; }
+  .button { @apply mt-4 w-fit no-underline; }
+  .primary { @apply border-[#10a37f] bg-[#10a37f] text-white hover:bg-[#0d8d6d]; }
+  .card { @apply my-5 rounded-2xl border border-white/10 bg-[#2a2a2a] p-5 shadow-sm; }
+  .card h2 { @apply mt-0 text-base font-medium text-white; }
+  .notice { @apply rounded-xl border border-[#10a37f]/25 bg-[#10a37f]/10 px-4 py-3 text-sm text-[#b9eadc]; }
+  dl { @apply grid gap-1 md:grid-cols-2; }
+  dl div { @apply flex items-center justify-between gap-4 border-b border-white/8 px-1 py-2.5; }
+  dt { @apply text-sm capitalize text-[#b4b4b4]; }
+  dd { @apply m-0 text-sm text-[#d9d9d9]; }
+  label { @apply mb-4 block text-sm text-[#d9d9d9]; }
+  input { @apply mt-2 block w-full rounded-xl border border-white/15 bg-[#212121] px-3 py-2.5 text-white outline-none placeholder:text-[#8e8e8e] focus:border-[#10a37f] focus:ring-1 focus:ring-[#10a37f]; }
+  .narrow { @apply max-w-md; }
+  .metrics { @apply grid gap-3 sm:grid-cols-3; }
+  .metrics article { @apply rounded-2xl border border-white/10 bg-[#2a2a2a] p-5 text-sm text-[#b4b4b4]; }
+  .metrics b { @apply mb-1 block text-3xl font-semibold text-white; }
+  .grid { @apply grid gap-4 md:grid-cols-2; }
+  .dashboard-title { @apply mb-6 flex items-center justify-between gap-4; }
+  .dashboard-title h1, main > h1 { @apply m-0 text-3xl font-semibold tracking-tight text-white; }
+  .tabs { @apply mb-5 flex flex-wrap gap-2; }
+  .tabs button { @apply rounded-lg bg-transparent px-3 py-2 text-[#b4b4b4] hover:bg-white/10 hover:text-white; }
+  .tabs .active { @apply bg-white/10 text-white; }
+  pre { @apply overflow-auto whitespace-pre-wrap break-words font-mono text-xs leading-5 text-[#d9d9d9]; }
+  code { @apply rounded bg-black/20 px-1.5 py-0.5 text-[#c8e9df]; }
+  [role="status"] { @apply mt-4 text-sm text-[#b4b4b4]; }
+  [role="alert"] { @apply mt-3 text-sm text-[#ff8a8a]; }
+}
+
+@keyframes hello-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hello-pulse { 0%,100% { transform: scale(.9); opacity: .45; } 50% { transform: scale(1.14); opacity: 1; } }
