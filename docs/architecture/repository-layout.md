@@ -1,6 +1,6 @@
-# Estructura del repositorio
+# Repository layout
 
-El repositorio separa la infraestructura reproducible de la evidencia de cada caso.
+The repository separates reproducible infrastructure from each case's evidence.
 
 ```text
 .
@@ -9,33 +9,26 @@ El repositorio separa la infraestructura reproducible de la evidencia de cada ca
 ├── docs/
 │   ├── architecture/
 │   ├── guides/
-│   ├── runbooks/
-├── infra/host/                 # nftables, systemd y notas de red del host
-├── tools/
-│   ├── recon/
-│   ├── osint/
-│   ├── tls/
-│   ├── forensics/
-│   ├── vulnerabilities/
-│   ├── windows/
-│   ├── web/
-│   ├── network/
-│   ├── visibility/
-│   └── validation/
-├── scripts/                    # instaladores y verificadores reproducibles
-├── templates/case/              # estructura sin datos reales
-├── lab/                         # objetivos y pruebas controladas
-└── (casos fuera de Git)          # evidencia y resultados no versionados
+│   └── runbooks/
+├── infra/host/                 # nftables, systemd, and host-network notes
+├── tools/                      # reconnaissance, OSINT, TLS, forensics, Windows,
+│                               # web, network, visibility, and validation
+├── scripts/                    # reproducible installers and verifiers
+├── templates/case/             # structure with no real data
+├── lab/                         # controlled targets and tests
+└── (cases outside Git)          # unversioned evidence and results
 ```
 
-## Convenciones
+## Conventions
 
-- Cada herramienta nueva debe tener su propio directorio y un README corto.
-- Un `Dockerfile` o `compose.yaml` describe instalación y ejecución; la configuración local va en `.env` o fuera del repositorio.
-- Las guías deben indicar explícitamente si el flujo es `local`, `vpn`, `tor` u `offline`.
-- `scripts/` contiene automatización transversal del laboratorio: instalación,
-  comprobaciones de dependencias, validación de red y reprovisionamiento.
-- Los scripts deben ser idempotentes cuando sea posible, explicar los cambios
-  que realizan y no guardar contraseñas, tokens, certificados ni objetivos.
-- Los casos nuevos se guardan fuera del repositorio en `CYBERSEC_CASES_DIR`; los
-  resultados se montan desde allí y nunca dentro de una imagen Docker.
+- Each tool has its own directory and concise README.
+- A `Dockerfile` or `compose.yaml` describes installation and execution; local
+  configuration belongs in `.env` or outside the repository.
+- Guides explicitly declare whether a workflow is `local`, `vpn`, `tor`, or
+  `offline`.
+- `scripts/` contains cross-cutting automation for installation, dependency
+  checks, network validation, and reprovisioning.
+- Scripts should be idempotent where possible, describe their changes, and
+  never store passwords, tokens, certificates, or targets.
+- New cases are kept in `CYBERSEC_CASES_DIR`; results are mounted from there
+  and never embedded in a Docker image.

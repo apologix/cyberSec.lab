@@ -1,12 +1,12 @@
-# Verificación de salida
+# Egress verification
 
-La prueba mínima de cada herramienta protegida tiene tres estados:
+Every protected tool needs three checks:
 
-1. Con ProtonWG activo, la salida externa debe mostrar la IP de Proton.
-2. Con ProtonWG apagado, la salida externa debe fallar o quedar bloqueada.
-3. En ambos estados, el acceso a la LAN autorizada debe seguir el modo documentado.
+1. With ProtonWG active, external egress must use the Proton address.
+2. With ProtonWG inactive, external egress must fail or be blocked.
+3. In both states, authorized LAN access must follow the documented mode.
 
-Comprobaciones del host:
+Host checks:
 
 ```bash
 ip rule
@@ -15,4 +15,4 @@ wg show protonwg
 sudo nft list ruleset
 ```
 
-No se deben publicar IPs públicas reales, claves, perfiles WireGuard ni credenciales en los resultados.
+Never publish real public IPs, WireGuard keys or profiles, or credentials in results.

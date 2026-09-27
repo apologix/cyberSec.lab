@@ -1,3 +1,5 @@
-# Windows, SMB y Active Directory
+# Windows, SMB, and Active Directory
 
-Aquí se documentarán enum4linux-ng, Impacket y utilidades relacionadas. Para protocolos completos de SMB/AD se usará `vpn` para objetivos externos o `local` para la LAN; Tor no es el modo general de esta área.
+This area documents enum4linux-ng, Impacket, and related utilities. Full SMB/AD
+protocols use `vpn` for external targets or `local` for the LAN; Tor is not the
+general mode for this area.

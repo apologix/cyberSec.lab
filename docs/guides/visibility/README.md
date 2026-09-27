@@ -1,3 +1,4 @@
-# Visibilidad
+# Visibility
 
-Aquí se documentarán Wireshark, Suricata y Zeek. Estas herramientas observan la red local o interfaces del host y no deben enviarse por ProtonWG ni Tor.
+This area documents Wireshark, Suricata, and Zeek. These tools observe the
+local network or host interfaces and must not be routed through ProtonWG or Tor.

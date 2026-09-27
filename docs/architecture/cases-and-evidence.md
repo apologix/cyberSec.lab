@@ -1,21 +1,21 @@
-# Casos, evidencia y correlación
+# Cases, evidence, and correlation
 
-Los casos nuevos se almacenan fuera del repositorio, en `CYBERSEC_CASES_DIR`.
-Si la variable no está definida, el valor seguro y portátil es el directorio
-hermano `../cases`. Los casos, resultados y evidencia no se versionan.
+New cases are stored outside the repository in `CYBERSEC_CASES_DIR`. If it is
+undefined, the portable default is the sibling `../cases` directory. Cases,
+results, and evidence are never versioned.
 
-Crear un caso:
+Create a case:
 
 ```bash
 ./scripts/new-case.sh CASE-2026-001
 ```
 
-La plantilla separa los resultados originales (`raw/`) de la evidencia
-seleccionada (`evidence/`). El wrapper `scripts/case-run.sh` registra timestamp,
-caso, herramienta, objetivo, modo de red, acción, resultado y ruta de salida
-en `metadata/logs/operations.jsonl`. Defina `CYBERSEC_CASE_TARGET` al
-invocarlo cuando el objetivo se pueda registrar. No registra argumentos para no
-filtrar secretos.
+The template separates original results (`raw/`) from selected evidence
+(`evidence/`). The `scripts/case-run.sh` wrapper records timestamp, case, tool,
+target, network mode, action, result, and output path in
+`metadata/logs/operations.jsonl`. Set `CYBERSEC_CASE_TARGET` only when the
+target is approved for recording; command arguments are intentionally omitted
+to avoid leaking secrets.
 
 ```bash
 CYBERSEC_CASE_TARGET=192.0.2.15 \
@@ -23,7 +23,7 @@ CYBERSEC_CASE_TARGET=192.0.2.15 \
   nmap -oX raw/nmap/host.xml 192.0.2.15
 ```
 
-`metadata/entities.json` representa entidades y relaciones. Las confianzas son
-`unverified`, `possible`, `probable` y `confirmed`. Una coincidencia de correo,
-username o perfil no prueba una identidad; cada relación debe conservar fuente,
-fecha, referencia de evidencia y notas.
+`metadata/entities.json` represents entities and relationships. Confidence
+values are `unverified`, `possible`, `probable`, and `confirmed`. An email,
+username, or profile match does not prove identity: every relationship needs a
+source, date, evidence reference, and notes.

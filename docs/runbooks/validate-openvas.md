@@ -1,4 +1,4 @@
-# Validación de OpenVAS
+# Validate OpenVAS
 
 ```bash
 cd ./tools/vulnerabilities/openvas
@@ -9,6 +9,5 @@ ip route show table 51820
 sudo nft list table inet openvas_killswitch
 ```
 
-Debe existir el bridge `openvasbr0`, las fuentes documentadas de OpenVAS y el
-kill switch activo. Las tareas de escaneo se crean solo para objetivos
-autorizados y no se ejecutan durante esta comprobación.
+The `openvasbr0` bridge, documented OpenVAS sources, and active kill switch must
+exist. Create scan tasks only for authorized targets; do not run them during this check.

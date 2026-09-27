@@ -1,58 +1,64 @@
-# Política de red del laboratorio
+# Lab network policy
 
-## Modos
+## Modes
 
 ### `local`
 
-Se usa para objetivos de la LAN autorizada. El host conserva su ruta normal y los contenedores deben alcanzar únicamente el rango LAN permitido. No se usa Tor ni se necesita ProtonWG.
+Use this mode for an authorized LAN target. The host keeps its normal route and
+containers may reach only the permitted LAN range. Tor and ProtonWG are not
+used.
 
 ### `vpn`
 
-Es el modo estándar para objetivos externos. El contenedor se conecta a una red Docker identificable por su IP de origen. El host dirige ese origen a la tabla de rutas `51820`, cuya salida es `protonwg`. Un kill switch bloquea la salida directa por Wi-Fi si ProtonWG está apagado.
-
-Dockerizar por sí solo no activa este modo.
+This is the standard mode for external targets. The container joins a Docker
+network identifiable by source IP; the host routes that source through table
+`51820`, whose egress is `protonwg`. A kill switch blocks direct Wi-Fi egress
+when ProtonWG is down. Docker alone does not enable this mode.
 
 ### `tor`
 
-Es un proxy de aplicación para herramientas compatibles con SOCKS, principalmente TCP. Se invoca por comando y no se convierte en la ruta global del host. No debe usarse para UDP, SYN/raw scans, Kerberos completo, ARP, captura ni visibilidad de red.
+An application proxy for SOCKS-compatible tools, primarily TCP. It is invoked
+per command and never becomes the host's global route. Do not use it for UDP,
+SYN/raw scans, full Kerberos, ARP, capture, or network visibility.
 
 ### `offline`
 
-Se usa para PCAP, archivos, reportes y análisis local. No requiere ninguna salida de red.
+Use this mode for PCAPs, files, reports, and local analysis. It requires no
+network egress.
 
-### Scapy local
+### Local Scapy
 
-Scapy se reserva para el host y la LAN/laboratorio autorizado. No se dockeriza
-como herramienta operativa, no tiene perfil remoto y no usa ProtonWG, Tor ni
-ProxyChains. Sus prácticas de MITM requieren un segmento aislado y un
-procedimiento de restauración.
+Scapy is reserved for the host and an authorized lab/LAN. It has no remote
+profile and does not use ProtonWG, Tor, or ProxyChains. MITM exercises require
+an isolated segment and a restoration procedure.
 
-## Regla de decisión
+## Decision rule
 
 ```text
-¿El objetivo está en la LAN autorizada?
-  sí  -> local
-  no  -> ¿la herramienta necesita IP/UDP/raw/protocolo completo?
-           sí  -> vpn (ProtonWG)
-           no  -> vpn por defecto; tor solo si el flujo lo requiere
+Is the target on the authorized LAN?
+  yes -> local
+  no  -> Does the tool require full IP, UDP, raw sockets, or protocol support?
+           yes -> vpn (ProtonWG)
+           no  -> vpn by default; tor only when the workflow requires it
 ```
 
-## Redes actuales protegidas
+## Protected networks
 
-| Proyecto | Bridge | Origen | Ruta |
+| Project | Bridge | Source | Route |
 |---|---|---|---|
-| OpenVAS | `openvasbr0` | `172.18.0.2`, `172.18.0.7` | tabla `51820` |
-| Metasploit | `metasploitbr0` | `172.20.0.2` | tabla `51820` |
-| Nuclei | `nucleibr0` | `172.30.0.2` | tabla `51820` |
-| enum4linux-ng | `enum4linuxbr0` | `172.31.0.2` | tabla `51820` |
-| Impacket | `impacketbr0` | `172.32.0.2` | tabla `51820` |
+| OpenVAS | `openvasbr0` | `172.18.0.2`, `172.18.0.7` | table `51820` |
+| Metasploit | `metasploitbr0` | `172.20.0.2` | table `51820` |
+| Nuclei | `nucleibr0` | `172.30.0.2` | table `51820` |
+| enum4linux-ng | `enum4linuxbr0` | `172.31.0.2` | table `51820` |
+| Impacket | `impacketbr0` | `172.32.0.2` | table `51820` |
 
-Las redes y reglas existentes deben mantenerse separadas hasta que exista una automatización común probada.
+Keep existing networks and rules separate until a tested common automation is
+available.
 
-## Perfiles pendientes de activación
+## Profiles awaiting activation
 
-El repositorio incluye definiciones sin instalar para OSINT (`osintbr0`,
-`172.33.0.2-.3`), DNS (`dnsbr0`, `172.34.0.2`) y TLS (`tlsbr0`, `172.35.0.2`).
-Antes de usarlos hay que crear las reglas de origen hacia la tabla `51820` y
-renderizar/instalar los kill switches desde `infra/host/*.example`. No son
-protecciones activas hasta completar ese procedimiento.
+The repository includes uninstalled definitions for OSINT (`osintbr0`,
+`172.33.0.2-.3`), DNS (`dnsbr0`, `172.34.0.2`), and TLS (`tlsbr0`,
+`172.35.0.2`). Before use, create the source rules for table `51820` and render
+and install kill switches from `infra/host/*.example`. They are not active
+protections until that procedure is complete.

@@ -1,34 +1,27 @@
-# Validación de Tor
+# Validate Tor
 
-## Objetivo
+## Goal
 
-Comprobar que Tor está activo, que existe un listener SOCKS local y que una
-consulta TCP realizada a través del proxy es reconocida como Tor. No prueba
-objetivos de auditoría ni modifica ProtonWG.
-
-## Verificación
+Confirm that Tor is active, a local SOCKS listener exists, and a TCP request
+through the proxy is recognized as Tor. This does not test audit targets or
+modify ProtonWG.
 
 ```bash
 cd .
 bash scripts/verify-tor.sh
 ```
 
-El script busca `127.0.0.1:9050` y `127.0.0.1:9150`, y consulta el endpoint
-de comprobación de Tor mediante `--socks5-hostname` para evitar resolver DNS
-fuera del proxy.
-
-## Resultado esperado
+The script checks `127.0.0.1:9050` and `127.0.0.1:9150`, then queries Tor's
+verification endpoint using `--socks5-hostname` to prevent DNS resolution
+outside the proxy.
 
 ```text
 OK   tor service     active
 OK   SOCKS listener  127.0.0.1:9050
 OK   Tor circuit     check.torproject.org confirms Tor
-Validación Tor: OK
+Tor validation: OK
 ```
 
-Si ambos puertos están activos, se usa primero `9050`. Si el servicio o el
-listener fallan, no usar perfiles Tor de PRET o cámaras hasta corregirlo.
-
-Tor no cubre UDP, raw sockets, ARP, captura ni protocolos IP completos. Para
-esos casos se utiliza la red local o ProtonWG según la política de la
-herramienta.
+When both ports are active, `9050` is preferred. Do not use Tor profiles until
+service and listener failures are corrected. Tor does not cover UDP, raw
+sockets, ARP, capture, or full IP protocols; use local networking or ProtonWG.

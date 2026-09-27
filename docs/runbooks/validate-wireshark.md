@@ -1,7 +1,7 @@
-# Validación de Wireshark
+# Validate Wireshark
 
-Wireshark se ejecuta localmente para capturas autorizadas y análisis offline.
-No usa ProtonWG ni Tor.
+Wireshark runs locally for authorized capture and offline analysis. It does not
+use ProtonWG or Tor.
 
 ```bash
 wireshark --version | head -n 1
@@ -9,5 +9,5 @@ tshark --version | head -n 1
 ip -br address
 ```
 
-Abrir una captura de prueba o capturar solo la interfaz y el segmento
-autorizados. No iniciar una captura amplia por defecto.
+Open a test capture or capture only the authorized interface and segment. Do
+not start a broad capture by default.

@@ -1,13 +1,12 @@
-# Validación de Nmap
+# Validate Nmap
 
-Nmap debe usarse únicamente contra objetivos propios o autorizados. Confirmar
-primero el alcance y seleccionar la interfaz/ruta correspondiente.
+Use Nmap only against owned or authorized targets. Confirm the scope first and
+select the appropriate interface and route.
 
 ```bash
 nmap --version
 sudo nmap -n -sn 192.168.100.0/24
 ```
 
-Para un objetivo externo autorizado, validar primero la ruta ProtonWG y usar
-el procedimiento aprobado de ProxyChains4. No escanear internet de forma
-indiscriminada.
+For an authorized external target, validate the ProtonWG route first and use the
+approved ProxyChains4 procedure. Do not scan the Internet indiscriminately.

@@ -1,11 +1,10 @@
-# Validar OSINT
+# Validate OSINT
 
-Primero instale el perfil de red OSINT, active ProtonWG y verifique que su kill
-switch está activo. Si la red externa `osint-runner_osint_net` no existe, siga
-primero [`configure-new-network-profiles.md`](configure-new-network-profiles.md).
-Holehe consulta actualizaciones incluso con `--help`; con
-ProtonWG apagado debe fallar por diseño. No ejecute consultas contra
-identificadores fuera del alcance.
+Install the OSINT network profile, enable ProtonWG, and verify its kill switch.
+If `osint-runner_osint_net` does not exist, first follow
+[configure-new-network-profiles.md](configure-new-network-profiles.md). Holehe
+checks updates even with `--help`; it must fail by design when ProtonWG is down.
+Do not query identifiers outside scope.
 
 ```bash
 cd tools/osint/osint-runner
@@ -15,7 +14,6 @@ sudo docker compose --env-file ../../../.env run --rm osint-runner maigret --hel
 sudo docker compose --env-file ../../../.env run --rm osint-runner sherlock --help
 ```
 
-Valide primero contra identificadores de prueba propios y escriba resultados en
-`/cases/CASE-.../raw/osint/<herramienta>/`. Una respuesta positiva sigue siendo
-un indicador. HIBP, Intelligence X y GitHub requieren sus respectivas claves
-locales; no imprima las variables ni las incluya en logs.
+Validate first with owned test identifiers and store results in the external
+case directory. HIBP, Intelligence X, and GitHub need their local keys; never
+print variables or include them in logs.

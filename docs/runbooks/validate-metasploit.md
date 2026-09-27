@@ -1,4 +1,4 @@
-# Validación de Metasploit
+# Validate Metasploit
 
 ```bash
 cd ./tools/validation/metasploit
@@ -9,6 +9,6 @@ ip route show table 51820
 sudo nft list table inet metasploit_killswitch
 ```
 
-La consola no debe ejecutar módulos contra objetivos durante esta validación.
-Para la LAN, leer primero [`LAN_MODE.md`](../../tools/validation/metasploit/LAN_MODE.md)
-y confirmar autorización, rango y restauración.
+Do not execute modules against targets during validation. For LAN work, read
+[LAN_MODE.md](../../tools/validation/metasploit/LAN_MODE.md) first and confirm
+authorization, range, and restoration.

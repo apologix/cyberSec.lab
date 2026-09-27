@@ -1,3 +1,4 @@
-# Red y paquetes
+# Network and packets
 
-Aquí se documentarán Scapy y Bettercap. Scapy tendrá perfiles separados para scripts reproducibles y operaciones LAN. Bettercap se mantendrá inicialmente en el host por sus requisitos L2.
+This area documents Scapy and Bettercap. Scapy has separate reproducible-script
+and LAN-operation profiles; Bettercap remains on the host because it needs L2 access.

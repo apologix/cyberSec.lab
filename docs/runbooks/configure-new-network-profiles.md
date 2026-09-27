@@ -1,32 +1,27 @@
-# Activar perfiles de red nuevos
+# Activate new network profiles
 
-Este procedimiento **modifica NetworkManager, nftables y systemd**. No se
-ejecuta automáticamente y requiere revisar la LAN, interfaz y disponibilidad
-de subredes en `.env`.
+This procedure **changes NetworkManager, nftables, and systemd**. It is not
+automatic: review LAN, interface, and subnet availability in `.env` first.
 
-Perfiles pendientes:
-
-| Perfil | Bridge | IPs | Prioridad sugerida |
+| Profile | Bridge | IPs | Suggested priority |
 |---|---|---|---|
 | OSINT / SpiderFoot | `osintbr0` | `172.33.0.2`, `172.33.0.3` | 150, 151 |
 | DNS | `dnsbr0` | `172.34.0.2` | 160 |
 | TLS | `tlsbr0` | `172.35.0.2` | 170 |
 
-La automatización reproducible está en `scripts/configure-new-network-profiles.sh`.
-Compruebe primero que las subredes no colisionan y ejecute el script con sudo.
-Este añade reglas `from IP/32 table 51820`, renderiza y valida los archivos
-nftables, instala y habilita los servicios, y solo entonces crea las redes
-Docker externas. Los Compose no pueden crear esas redes por sí mismos: si no
-existen, se detienen en lugar de permitir una salida directa accidental.
+Run `scripts/configure-new-network-profiles.sh` with sudo only after confirming
+subnets do not collide. It adds `from IP/32 table 51820` rules, renders and
+validates nftables files, installs and enables services, then creates external
+Docker networks. Compose files cannot create these networks: they stop instead
+of allowing accidental direct egress.
 
-La instalación se rechaza si ya existe alguno de los servicios nuevos, para no
-mezclar una configuración previa con una nueva. Si una etapa falla, el script
-retira las reglas y archivos que acababa de crear. Finalmente ejecute:
+The installation refuses an existing service to avoid mixing configurations. If
+a stage fails, it removes rules and files it just created. Then run:
 
 ```bash
 ./scripts/verify-network-policy.sh --include-pending
 ./scripts/verify-container-egress.sh
 ```
 
-La segunda prueba debe realizarse con ProtonWG activo y apagado. Hasta que
-ambas terminen correctamente, no ejecute los contenedores contra Internet.
+Run the second test with ProtonWG both active and inactive. Do not use the
+containers against the Internet until both complete successfully.

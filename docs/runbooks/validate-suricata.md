@@ -1,7 +1,7 @@
-# Validación de Suricata
+# Validate Suricata
 
-Suricata se ejecuta localmente como IDS/NSM sobre una interfaz definida. No usa
-ProtonWG ni Tor.
+Suricata runs locally as IDS/NSM on an explicit interface. It does not use
+ProtonWG or Tor.
 
 ```bash
 suricata --build-info | head -n 3
@@ -9,5 +9,5 @@ sudo suricata --list-runmodes
 systemctl is-enabled suricata 2>/dev/null || true
 ```
 
-No activar captura permanente hasta seleccionar interfaz, reglas, destino de
-logs y retención para la LAN autorizada.
+Do not enable permanent capture until selecting the interface, rules, log
+destination, and retention policy for the authorized LAN.

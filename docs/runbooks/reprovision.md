@@ -1,23 +1,21 @@
-# Reprovisionar una PC
+# Reprovision a workstation
 
-## Dependencias del host
+## Host dependencies
 
-Debian, Docker Engine, Compose v2, NetworkManager, WireGuard, `iproute2`, `nftables`, systemd, `curl`, certificados CA, Tor y ProxyChains4 cuando sean necesarios.
+Debian, Docker Engine, Compose v2, NetworkManager, WireGuard, `iproute2`,
+`nftables`, systemd, `curl`, CA certificates, Tor, and ProxyChains4 when needed.
 
-## Orden recomendado
+## Recommended order
 
-1. Clonar el repositorio privado.
-2. Copiar `.env.example` a `.env` y ajustar interfaz, LAN, ProtonWG y SOCKS.
-3. Importar el perfil privado de ProtonWG fuera del repositorio.
-4. Configurar la tabla de rutas `51820` sin cambiar la ruta por defecto del host.
-5. Instalar las plantillas nftables y servicios systemd desde `infra/host/`.
-6. Levantar OpenVAS y Metasploit; comprobar sus bridges e IPs.
-7. Verificar ProtonWG encendido y apagado antes de incorporar una herramienta nueva.
-8. Construir solo las imágenes que se vayan a utilizar.
+1. Clone the repository.
+2. Copy `.env.example` to `.env` and set the interface, LAN, ProtonWG, and SOCKS values.
+3. Import the private ProtonWG profile from outside the repository.
+4. Configure routing table `51820` without changing the host default route.
+5. Install nftables templates and systemd services from `infra/host/`.
+6. Start OpenVAS and Metasploit, then check their bridges and IPs.
+7. Test ProtonWG both up and down before adding a new tool.
+8. Build only the images needed for the task.
 
-La instalación local se ejecuta con `scripts/install-local-tools.sh` y
-`scripts/install-special-local-tools.sh`. Después de instalar, ejecutar
-`scripts/verify-lab.sh` y corregir cualquier elemento pendiente antes de usar
-las herramientas.
-Para comprobar que los contenedores no tengan fuga por Wi-Fi, ejecutar también
-`scripts/verify-container-egress.sh` con las redes Docker levantadas.
+Run `scripts/install-local-tools.sh` and `scripts/install-special-local-tools.sh`,
+then `scripts/verify-lab.sh`. With Docker networks running, also use
+`scripts/verify-container-egress.sh` to check for direct Wi-Fi leaks.

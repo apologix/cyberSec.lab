@@ -1,3 +1,4 @@
-# Vulnerabilidades
+# Vulnerabilities
 
-Aquí se documentarán OpenVAS y futuras herramientas de evaluación. OpenVAS permanece en `tools/vulnerabilities/openvas/`.
+This area documents OpenVAS and future assessment tools. OpenVAS lives in
+`tools/vulnerabilities/openvas/`.

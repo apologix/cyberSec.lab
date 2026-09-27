@@ -1,21 +1,17 @@
-# Validación de Scapy local
-
+# Local Scapy Validation
 ## Objetivo
 
-Validar la instalación y la construcción de paquetes sin enviar tráfico ni
-usar objetivos remotos. Scapy se reserva para la LAN autorizada y laboratorios
-locales de MITM.
-
-## Instalación y prueba sin red
-
+Validate the installation and construction of packages without sending traffic or
+use remote targets. Scapy is reserved for authorized LAN and labs
+mITM premises.
+## Non-network installation and testing
 ```bash
 python3 -m venv ~/.venvs/cybersec-scapy
 ~/.venvs/cybersec-scapy/bin/python -m pip install --upgrade pip scapy
 ~/.venvs/cybersec-scapy/bin/python -c 'from scapy.all import IP, ICMP; print(IP(dst="127.0.0.1")/ICMP())'
 ```
 
-La última línea debe imprimir un paquete IP/ICMP y no realiza un envío.
-
+The last line must print an IP/ICMP packet and does not send.
 ## Interfaz
 
 ```bash
@@ -23,22 +19,20 @@ ip -br address
 ip route
 ```
 
-Confirmar que la interfaz pertenece al laboratorio autorizado y que no se está
-usando `protonwg` para una práctica LAN.
-
+Confirm that the interface belongs to the authorized laboratory and that it is not being
+using `protonwg` for a LAN practice.
 ## MITM
 
-No se considera validado un ejercicio MITM solo porque Scapy importe. Se
-necesita un laboratorio aislado, autorización escrita, dispositivos propios y
-un procedimiento de restauración. La validación MITM se documentará como
-experimento separado cuando exista ese laboratorio.
-
+An MITM exercise is not considered validated just because Scapy matters. It is
+needs an isolated laboratory, written authorization, own devices and
+a restoration procedure. MITM validation will be documented as
+separate experiment when that lab exists.
 ## Resultado esperado
 
-| Prueba | Resultado |
+| Test | Result |
 |---|---|
-| Importación | Scapy crea un paquete en memoria |
-| Interfaz | LAN autorizada identificada |
-| Remoto | No soportado por este perfil |
-| ProtonWG/Tor | No usados |
-| MITM | Pendiente de laboratorio aislado |
+| Import | Scapy creates a package in memory |
+| Interface | Authorized LAN identified |
+| Remote | Not supported by this profile |
+| ProtonWG/Tor | Unused |
+| MITM | Isolated Lab Slope |

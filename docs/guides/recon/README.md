@@ -1,3 +1,5 @@
-# Reconocimiento
+# Reconnaissance
 
-Aquí se documentarán Nmap, Nuclei y los flujos de reconocimiento reproducibles. El modo externo estándar será `vpn` mediante ProtonWG; los flujos Tor quedarán documentados como excepciones para TCP compatible.
+This area documents Nmap, Nuclei, and reproducible reconnaissance workflows.
+The standard external mode is `vpn` through ProtonWG; Tor is documented only as
+an exception for compatible TCP flows.

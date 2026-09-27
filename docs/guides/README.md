@@ -1,6 +1,7 @@
-# Guías por área
+# Guides by area
 
-Las guías de uso se organizan por función. Cada guía nueva debe documentar objetivo, prerrequisitos, modo de red, ejecución, salida esperada y limpieza.
+Usage guides are organized by function. Every new guide must document its goal,
+prerequisites, network mode, execution, expected output, and cleanup.
 
 - `recon/`
 - `vulnerabilities/`

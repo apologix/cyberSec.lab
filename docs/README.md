@@ -1,16 +1,14 @@
-# Documentación del laboratorio
+# Lab documentation
 
-Esta carpeta documenta únicamente diseño reproducible y procedimientos para
-entornos autorizados. No incluye contexto histórico, datos de infraestructura
-real, resultados de pruebas ni evidencia de casos.
+This directory documents reproducible design and procedures for authorized
+environments only. It contains no historical context, real infrastructure
+details, test results, or case evidence.
 
-## Secciones
+## Sections
 
-- `architecture/`: modelo de red, límites de los modos de salida y estructura
-  del repositorio.
-- `guides/`: guías por herramienta y flujo de trabajo.
-- `runbooks/`: instalación, verificación y recuperación para un laboratorio
-  propio.
+- `architecture/`: network model, egress-mode limits, and repository layout.
+- `guides/`: tool- and workflow-specific guidance.
+- `runbooks/`: installation, verification, and recovery for a personal lab.
 
-Las direcciones, interfaces y nombres de conexión se tratan como parámetros de
-laboratorio; revísalos y sustitúyelos antes de ejecutar cualquier procedimiento.
+Treat addresses, interfaces, and connection names as lab parameters. Review and
+replace them before running a procedure.

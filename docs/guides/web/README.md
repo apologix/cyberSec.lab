@@ -1,3 +1,4 @@
 # Web
 
-Aquí se documentarán Burp Suite y las herramientas web. Burp se evaluará inicialmente para uso en el host por sus requisitos de navegador, certificados y GUI.
+This area documents Burp Suite and web tools. Burp is initially evaluated on
+the host because it requires a browser, certificates, and a graphical interface.

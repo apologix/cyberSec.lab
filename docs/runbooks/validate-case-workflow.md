@@ -1,16 +1,16 @@
-# Validar el flujo de casos
+# Validate the case workflow
 
-Esta validación no necesita red, Docker ni privilegios.
+This validation needs no network, Docker, or privileges.
 
 ```bash
 ./scripts/new-case.sh CASE-2026-001
-CYBERSEC_CASE_TARGET=archivo-de-prueba \
+CYBERSEC_CASE_TARGET=test-file \
   ./scripts/case-run.sh CASE-2026-001 offline validation raw/validation/echo.txt -- \
   sh -c 'echo ok > raw/validation/echo.txt'
 ```
 
-Compruebe que se creó el árbol con permisos restrictivos y que
-`metadata/logs/operations.jsonl` contiene una línea JSON con objetivo, modo,
-acción, estado y salida. Repita el primer
-comando: debe fallar sin sobrescribir el caso existente. Elimine el caso de
-prueba manualmente solo después de verificar que no contiene evidencia real.
+Confirm that the restrictive directory tree exists and that
+`metadata/logs/operations.jsonl` contains a JSON line with target, mode, action,
+status, and output. Running the first command again must fail without replacing
+the existing case. Delete the test case manually only after confirming it holds
+no real evidence.
